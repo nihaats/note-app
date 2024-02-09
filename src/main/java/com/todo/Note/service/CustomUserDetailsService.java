@@ -1,14 +1,15 @@
 package com.todo.Note.service;
 
+import com.todo.Note.CustomUserDetails;
 import com.todo.Note.model.User;
+import com.todo.Note.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import com.todo.Note.repository.UserRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
@@ -16,14 +17,11 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUserName(username);
 
+        User user = userRepository.findByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException("User not found with username: " + username);
+            throw new UsernameNotFoundException("User Not Found");
         }
-
-        // Spring Security UserDetails'ı oluştur
-        return org.springframework.security.core.userdetails.User.withUsername(username)
-                .password(user.getPassword()).roles("USER").build();
+        return new CustomUserDetails(user);
     }
 }
