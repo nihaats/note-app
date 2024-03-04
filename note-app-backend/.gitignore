@@ -40,4 +40,4 @@ secrets.yml
 .gradletasknamecache
 .sts4-cache
 .git-hooks/
-../note-app-frontend/*
+./../note-app-frontend/
