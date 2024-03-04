@@ -1,0 +1,17 @@
+<form [formGroup]="formGroup">
+  <div class="forms-inputs mb-4">
+    <span>Email or username</span>
+    <atom-input formControlName="username" >
+    </atom-input>
+  </div>
+  <div class="forms-inputs mb-4">
+    <span>Password</span>
+    <atom-input formControlName="password" >
+    </atom-input>
+  </div>
+  <div class="mb-3">
+    <button type="button" class="btn btn-dark w-100" (click)="submit()">
+      Login
+    </button>
+  </div>
+</form>
